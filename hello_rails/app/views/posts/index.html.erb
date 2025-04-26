@@ -1,0 +1,14 @@
+<h1>All Posts</h1>
+
+<%= link_to "New Post", new_post_path %>
+
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <%= link_to post.title, post_path(post) %> |
+      <%= link_to "Edit", edit_post_path(post) %> |
+      <%= button_to "Delete", post_path(post), method: :delete, form_class: "as-link", data: { confirm: "Are you sure?" } %>
+    </li>
+  <% end %>
+</ul>
+

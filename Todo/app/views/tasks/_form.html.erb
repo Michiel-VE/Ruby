@@ -1,0 +1,40 @@
+<%= form_with(model: task) do |form| %>
+  <% if task.errors.any? %>
+    <div style="color: red">
+        <% task.errors.each do |error| %>
+          <p><%= error.full_message %></p>
+        <% end %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.textarea :description %>
+  </div>
+
+  <div>
+    <%= form.label :due_date, style: "display: block" %>
+    <%= form.date_field :due_date %>
+  </div>
+
+  <div>
+    <%= form.label :priority, style: "display: block" %>
+    <%= form.select :priority, Priority.constants
+      .sort_by { |const| Priority.const_get(const) }
+      .map { |const| [const.to_s.titleize, Priority.const_get(const)] } %>
+  </div>
+
+  <div>
+    <%= form.label :completed, style: "display: block" %>
+    <%= form.checkbox :completed %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
